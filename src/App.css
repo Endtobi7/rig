@@ -1,0 +1,89 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.scene-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.scene {
+  position: relative;
+  width: min(94vw, 1300px);
+  aspect-ratio: 1617 / 1035;
+  user-select: none;
+  touch-action: none;
+  cursor: grab;
+}
+
+.scene.is-dragging {
+  cursor: grabbing;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.moving {
+  transition: transform 140ms linear;
+  will-change: transform;
+}
+
+.scene.is-dragging .moving {
+  transition: none;
+}
+
+.axis-reference {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  width: 44px;
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.controls {
+  width: min(94vw, 1300px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.control span {
+  width: 14px;
+}
+
+.control input {
+  width: 100%;
+}
+
+@media (max-width: 760px) {
+  .app {
+    padding: 12px;
+    gap: 14px;
+  }
+
+  .controls {
+    grid-template-columns: 1fr;
+  }
+}
