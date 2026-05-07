@@ -19,6 +19,11 @@ const CALIBRATION = {
   },
 }
 
+const GUIDE_PATHS = [
+  { x1: 373, x2: 1032, y: 500 },
+  { x1: 316, x2: 1264, y: 635 },
+]
+
 const clamp = (value, min = -1, max = 1) => Math.max(min, Math.min(max, value))
 
 function App() {
@@ -89,6 +94,23 @@ function App() {
         >
           <img className="layer" src={frameImage} alt="H-Bot fixed frame" draggable={false} />
           <img className="layer" src={lowerTowersImage} alt="H-Bot lower towers" draggable={false} />
+          <svg
+            className="guide-paths"
+            viewBox={`0 0 ${CALIBRATION.frame.width} ${CALIBRATION.frame.height}`}
+            aria-hidden="true"
+          >
+            {GUIDE_PATHS.map((path) => (
+              <line
+                key={`${path.x1}-${path.x2}-${path.y}`}
+                className="guide-path"
+                x1={path.x1}
+                x2={path.x2}
+                y1={path.y}
+                y2={path.y}
+                vectorEffect="non-scaling-stroke"
+              />
+            ))}
+          </svg>
 
           <img className="layer moving" style={transforms.green} src={leftTraverseImage} alt="Left green traverse" draggable={false} />
           <img className="layer moving" style={transforms.green} src={rightTraverseImage} alt="Right green traverse" draggable={false} />
